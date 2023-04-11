@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}Incarcare stoc{% endblock %} {% block content%}
+<div id="video-container">
+  <div class="video-overlay"></div>
+  <div class="video-content">
+      <div class="inner">
+        <h3 style="color:white" align="center">Incarcare stoc:</h3>
+        <div class="form-group">
+          <label for="cod3"></label>
+          <form method="POST">
+          <input
+            type="number"
+            class="form-control"
+            id="cod3"
+            name="cod3"
+            placeholder="Introduceti codul produsului"
+          />
+        </div>
+        <div class="form-group">
+            <label for="stoc2"></label>
+            <input
+              type="number"
+              class="form-control"
+              id="stoc2"
+              name="stoc2"
+              placeholder="Introduceti stocul"
+            />
+          </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Salvare</button>
+      </form>
+  
+             
+      </div>
+  </div>
+  <video autoplay loop muted>
+ <source src={{ url_for('static', filename="highway-loop.mp4") }} type="video/mp4">
+  </video>
+</div>
+
+    
+    
+    
+  {% endblock %}

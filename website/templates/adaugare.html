@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block title %}Adaugare prod.{% endblock %} {% block content%}
+
+  <div id="video-container">
+    <div class="video-overlay"></div>
+    <div class="video-content">
+        <div class="inner">
+          <h3 style="color:white" align="center">Adaugare produs:</h3>
+          <label for="categorie"></label>
+          <form method="POST">
+          <select class="form-control" id="categorie" name="categorie">
+            <option>Placi de baza</option>
+            <option>Procesoare</option>
+            <option>Memorii RAM</option>
+            <option>Componente stocare(HDD/SSD)</option>
+            <option>Placi video</option>
+            <option>Surse de alimentare</option>
+            <option>Carcase</option>
+            <option>Periferice</option>
+           </select>
+        
+          <div class="form-group">
+            <label for="marca"></label>
+            <input
+              type="text"
+              class="form-control"
+              id="marca"
+              name="marca"
+              placeholder="Introduceti marca produsului"
+            />
+          </div>
+          <div class="form-group">
+            <label for="model"></label>
+            <input
+              type="text"
+              class="form-control"
+              id="model"
+              name="model"
+              placeholder="Introduceti modelul:"
+            />
+          </div>
+          <div class="form-group">
+            <label for="pret"></label>
+            <input
+              type="number"
+              class="form-control"
+              id="pret"
+              name="pret"
+              placeholder="Introduceti pretul"
+            />
+          </div>
+          <div class="form-group">
+            <label for="cod"></label>
+            <input
+              type="number"
+              class="form-control"
+              id="cod"
+              name="cod"
+              placeholder="Introduceti codul produsului"
+            />
+          </div>
+          <div class="form-group">
+            <label for="stoc"></label>
+            <input
+              type="number"
+              class="form-control"
+              id="stoc"
+              name="stoc"
+              placeholder="Introduceti stocul"
+            />
+          </div>
+          <div class="form-group">
+            <label for="taraprovenienta"></label>
+            <input
+              type="text"
+              class="form-control"
+              id="taraprovenienta"
+              name="taraprovenienta"
+              placeholder="Introduceti tara de provenienta:"
+            />
+          </div>
+          <br />
+          <button type="submit" class="btn btn-primary">Salvare</button>
+        </form>
+               
+        </div>
+    </div>
+    <video autoplay loop muted>
+   <source src={{ url_for('static', filename="highway-loop.mp4") }} type="video/mp4">
+    </video>
+</div>
+  
+{% endblock %}

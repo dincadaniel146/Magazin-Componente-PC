@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block title %}Vizualizare produse{% endblock %} {% block content%}
+
+  <head>
+    <style>
+      table {
+        border-collapse: separate;
+        border-spacing: 0 15px;
+      }
+      th {
+        background-color: #4287f5;
+        color: white;
+      }
+      th,
+      td {
+        width: 150px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 5px;
+      }
+      h2 {
+        color: #4287f5;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <table>
+        <tr>
+          <th>Cod</th>
+          <th>Marca</th>
+          <th>Model</th>
+          <th>Pret</th>
+          <th>Tara Provenienta</th>
+          <th>Stoc</th>
+          <th>Categorie</th>
+        </tr>
+        {%for Produse in query%}
+        <tr>
+          <td class="td">{{Produse.cod}}</td>
+          <td>{{Produse.marca}}</td>
+          <td>{{Produse.model}}</td>
+          <td>{{Produse.pret}}</td>
+          <td>{{Produse.taraprovenienta}}</td>
+          <td>{{Produse.stoc}}</td>
+          <td>{{Produse.categorie}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    {% endblock %}
+        

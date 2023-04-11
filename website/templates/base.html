@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-theme.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontAwesome.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='light-box.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='templatemo-style.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <title>{% block title %}Acasa{% endblock %}</title>
+  </head>
+  <body>
+
+    <nav>
+        <div class="logo">
+            <a href="/">Magazin-<em>Componente PC</em></a>
+        </div>
+        <div class="menu-icon">
+        <span></span>
+      </div>
+    </nav>
+    
+
+    <footer>
+      <div class="container-fluid">
+          <div class="col-md-12">
+
+          </div>
+      </div>
+  </footer>
+ 
+  
+
+    <section class="overlay-menu">
+      <div class="container">
+        <div class="row">
+          <div class="main-menu">
+            {% if user.is_authenticated %}
+              <ul>
+                  <li>
+                      <a class="nav-item nav-link" id=" Acasa" href="/">Acasa</a>
+                  </li>
+                  <li>
+                      <a class="nav-item nav-link" id="adaugareprodus" href="/adaugareprodus">Adaugare Produs</a>
+                  </li>
+                  <li>
+                      <a class="nav-item nav-link" id="vanzareprodus" href="/vanzareprodus">Vanzare produs</a>
+                  </li>
+                  <li>
+                      <a class="nav-item nav-link" id="stergereprodus" href="/stergereprodus">Stergere produs</a>
+                  </li>
+                  <li>
+                      <a class="nav-item nav-link" id="incarcarestoc" href="/incarcarestoc">Incarcare stoc</a>
+                  </li>
+                  <li>
+                      <a class="nav-item nav-link" id="vizualizare" href="/vizualizare">Vizualizare produse</a>
+                  </li>
+                  <li>
+                    <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                  </li>
+              </ul>
+              {% else %}
+              <ul>
+              <li>
+              <a class="nav-item nav-link" id="login" href="/login">Login</a>
+            </li>
+            <li>
+              <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+            </li>
+          </ul>
+              {% endif %}
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
+
+    <script src="{{ url_for('static', filename='bootstrap.min.js')}}"></script>
+    
+    <script src="{{ url_for('static', filename='plugins.js')}}"></script>
+    <script src="{{ url_for('static', filename='main.js')}}"></script>
+
+    {% block content %}
+    
+  {% endblock %}
+
+</body>
+</html>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %} {% if category ==
+      'error' %}
+      <div class="alert alert-danger alter-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% else %}
+      <div class="alert alert-success alter-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+      <div class="container" ></div>
+      <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+      ></script>
+  
+      <script
+        type="text/javascript"
+        src="{{ url_for('static', filename='index.js') }}"
+      ></script>
+   
+  </body>
+</html>

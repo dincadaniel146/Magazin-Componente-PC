@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Stergere produs{% endblock %} {% block content%}
+
+  <div id="video-container">
+    <div class="video-overlay"></div>
+    <div class="video-content">
+        <div class="inner">
+          <h3 style="color:white" align="center">Stergere produs:</h3>
+    
+    <div class="form-group">
+      <label for="cod"></label>
+      <form method="POST">
+      <input
+        type="number"
+        class="form-control"
+        id="cod1"
+        name="cod1"
+        placeholder="Introduceti codul produsului"
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Salvare</button>
+  </form>
+    
+               
+        </div>
+    </div>
+    <video autoplay loop muted>
+   <source src={{ url_for('static', filename="highway-loop.mp4") }} type="video/mp4">
+    </video>
+</div>
+    
+  {% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Acasa{% endblock %} {% block content %}
+
+ <html>
+    <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-theme.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontAwesome.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='light-box.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='templatemo-style.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+   
+</head>
+<body>
+    <div id="video-container">
+    <div class="video-overlay"></div>
+    <div class="video-content">
+        <div class="inner">
+          <h1>Bun venit! </h1>
+    
+               
+        </div>
+    </div>
+    <video autoplay loop muted>
+   <source src={{ url_for('static', filename="highway-loop.mp4") }} type="video/mp4">
+    </video>
+</div>
+
+</body>
+</html>
+
+{% endblock %}
