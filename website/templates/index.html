@@ -1,31 +1,237 @@
-{% extends "base.html" %} {% block title %}Acasa{% endblock %} {% block content %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
 
- <html>
-    <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-theme.min.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='fontAwesome.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='light-box.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='templatemo-style.css')}}">
-    <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-   
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="static/css/Bootstrap-Calendar.css">
+    <link rel="stylesheet" href="static/css/Navbar-Right-Links-Dark-icons.css">
 </head>
+
 <body>
-    <div id="video-container">
-    <div class="video-overlay"></div>
-    <div class="video-content">
-        <div class="inner">
-          <h1>Bun venit! </h1>
-    
-               
+    <header class="bg-dark" style="margin-bottom: 0px;padding-bottom: 29px;">
+        <div class="container pt-4 pt-xl-5">
+            <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark" style="margin-left: -1px;padding-top: 0px;margin-top: -49px;padding-left: 0px;">
+                <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded d-flex justify-content-center align-items-center me-2 bs-icon" style="margin-bottom: 0px;margin-left: 0px;padding-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="padding-top: 0px;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;font-size: 38px;">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3 6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6V14C21 15.1046 20.1046 16 19 16H5C3.89543 16 3 15.1046 3 14V6ZM5 6H19V14H5V6Z" fill="currentColor"></path>
+                                <path d="M2 18C1.44772 18 1 18.4477 1 19C1 19.5523 1.44772 20 2 20H22C22.5523 20 23 19.5523 23 19C23 18.4477 22.5523 18 22 18H2Z" fill="currentColor"></path>
+                            </svg></span><span class="text-capitalize fs-5 fw-bold">Magazin Componente IT</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navcol-5" style="margin-right: -126px;padding-left: 0px;margin-left: -5px;">
+                        <!-- SEARCH  -->
+                        
+                        
+                        <input class="mx-auto" list="list-suggestions" type="search" id="searchInput"placeholder="Cautati produse (ID/Nume)" style="font-size: 18px;border-radius: 16px;border-color: transparent;"><span><datalist id="suggestions"></datalist></span>
+
+
+
+
+
+
+
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="active fw-light" id="adaugareprodus" href="/adaugareprodus" style="margin-right: 0px;">Adaugare produs nou</a></li>
+
+                        </ul><a class="active fw-light" href="#" style="margin-left: 15px;">Istoric comenzi</a><a class="active fw-light" id="vizualizare" href="/vizualizare" style="margin-left: 15px;">Vizualizare inventar</a><a class="btn btn-primary btn-sm fw-normal" id="logout" href="/logout" style="background: var(--bs-red);color: var(--bs-black);font-size: 16px;margin-left: 16px;border-color: transparent;">Logout</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="row pt-5">
+                <div class="col">
+                    <h1 class="fw-bold">Bun venit, {{ current_user.Nume}}</h1>
+                    <p class="fs-6 fw-bold mb-2">{{current_user.email}}</p>
+                </div>
+                <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
+                    <div class="text-center"></div>
+                    <h1>{{data}}</h1>
+                </div>
+                <div class="col-12 col-lg-10 mx-auto">
+                    <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
+                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"></div>
+                        <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"></div>
+                        <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="alert alert-success" role="alert" id="success-alert" style="margin-top:30px;">
+            {% for category, message in messages %}
+            <h5 class="{{ category }}">{{ message }}</h5>
+          {% endfor %}
+        </div>
+        <script>
+            setTimeout(function() {
+              var alert = document.getElementById('success-alert');
+              alert.parentNode.removeChild(alert);
+            }, 4000);
+          </script>
+        {% endif %}
+      {% endwith %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="padding-top: 0px;margin-top: 100px;background: url(&quot;https://img.freepik.com/free-vector/gradient-abstract-wireframe-background_23-2149009903.jpg?size=626&amp;ext=jpg&amp;ga=GA1.1.1224184972.1712188800&amp;semt=ais&quot;);">
+                    <div class="card-body">
+                        <h4 class="card-title">Comenzi Recente</h4>
+                        <h6 class="text-muted card-subtitle mb-2">Lista cu comenzi recente plasate de clienti</h6>
+                        <p class="card-text">Aici va fi o lista cu comenzile recente (4 cele mai recente)</p><a class="card-link" href="#">Istoric complet al comenzilor</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="padding-top: 100px;border-radius: 16px;">
+                    <div class="card-body" style="background: url(&quot;https://img.freepik.com/free-vector/abstract-big-data-digital-technology-background-design_1017-22920.jpg&quot;);border-radius: 16px;">
+                        <h4 class="card-title">Stocul de produse</h4>
+                        <h6 class="text-muted card-subtitle mb-2">Sumar al stocului de produse disponibile</h6>
+                        <ul>
+                            <li>Numar total de produse: {{numar_total_produse}}</li>
+                            <li>Stocul total de produse: {{numar_stoc_total}}</li>
+                            <li>Produse cu stoc limitat: {{stoc_limitat}}</li>
+                        </ul><a class="card-link" href="/vizualizare">Vizualizare stoc complet</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="padding-top: 100px;">
+                    <div class="card-body" style="background: url(&quot;https://img.freepik.com/free-vector/gradient-abstract-wireframe-background_23-2149020364.jpg&quot;);border-radius: 16px;">
+                        <h4 class="card-title">Venituri</h4>
+                        <h6 class="text-muted card-subtitle mb-2"></h6>
+                        <ul>
+                            <li>Totalul vanzarilor:</li>
+                            <li>Vanzari astazi:</li>
+                            <li>Venit total:</li>
+                            <li>Venit astazi:</li>
+                        </ul>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <video autoplay loop muted>
-   <source src={{ url_for('static', filename="highway-loop.mp4") }} type="video/mp4">
-    </video>
-</div>
+    <div class="container">
+        <div class="row" style="padding: 0px;margin: 0px;height: 400px;margin-bottom: 19px;">
+            <div class="col-md-6" style="margin-top: 100px;">
+                <div class="card">
+                    <div class="card-body" style="background: url(&quot;https://img.freepik.com/free-vector/colorful-abstract-background_23-2148463930.jpg&quot;);border-radius: 16px;">
+                        <h4 class="card-title">Cele mai vandute produse</h4>
+                        <p class="card-text"></p>
+                        <ul>
+                            <li>Item 1</li>
+                            <li>Item 2</li>
+                            <li>Item 3</li>
+                            <li>Item 4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="margin-top: 0px;padding-top: 100px;">
+                <div class="card">
+                    <div class="card-body" style="background: url(&quot;https://img.freepik.com/free-vector/background-abstract-gradient-color-style_483537-3672.jpg&quot;);border-radius: 16px;">
+                        <h4 class="card-title">Cele mai putin vandute produse</h4>
+                        <p class="card-text"></p>
+                        <ul>
+                            <li>Item 1</li>
+                            <li>Item 2</li>
+                            <li>Item 3</li>
+                            <li>Item 4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center bg-dark">
+        <div class="container text-white py-4 py-lg-5">
+            <ul class="list-inline">
+                <li class="list-inline-item me-4"></li>
+                <li class="list-inline-item me-4"><a class="link-light" href="#">Github</a></li>
+                <li class="list-inline-item"></li>
+            </ul>
+            <ul class="list-inline">
+                <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook text-light">
+                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"></path>
+                    </svg></li>
+                <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-twitter text-light">
+                        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15"></path>
+                    </svg></li>
+                <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-instagram text-light">
+                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"></path>
+                    </svg></li>
+            </ul>
+            <p class="text-muted mb-0">Copyright © 2024 Magazin de Componente IT</p>
+        </div>
+    </footer>
+    <section></section>
+    <div class="card"></div>
+    <section></section>
+    <section></section>
+    <footer class="bg-dark"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/bold-and-dark.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
+    <script>
+$(document).ready(function() {
+    $('#searchInput').on('input', function() {
+        var query = $(this).val();
+        if (query.length >= 2) {
+            $.ajax({
+                url: '/search',
+                method: 'GET',
+                data: { query: query },
+                success: function(response) {
+    var suggestions = response.suggestions;
+    if (suggestions.length > 0) {
+        var suggestionHtml = '';
+        suggestions.forEach(function(suggestion) {
+            suggestionHtml += `<div class="suggestion" data-cod="${suggestion.cod}" data-marca="${suggestion.marca}" data-model="${suggestion.model}">${suggestion.marca} - ${suggestion.model}</div>`;
+        });
+        $('#suggestions').html(suggestionHtml);
+        $('#suggestions').show(); // Show the suggestions container
+    } else {
+        $('#suggestions').empty(); // Clear suggestions if no results
+        $('#suggestions').hide(); // Hide the suggestions container
+    }
+}
+            });
+        } else {
+            $('#suggestions').empty(); // Clear suggestions if input length is less than 3
+            $('#suggestions').hide(); // Hide the suggestions container
+        }
+    });
+    $('#searchInput').on('keydown', function(event) {
+        var keyCode = event.keyCode || event.which;
+        if (keyCode === 13) { // Enter key pressed
+            var firstSuggestion = $('.suggestion:first');
+            if (firstSuggestion.length) {
+                var cod = firstSuggestion.data('cod');
+                var marca = firstSuggestion.data('marca');
+                var model = firstSuggestion.data('model');
+                $('#searchInput').val(`${marca} - ${model}`);
+                window.location.href = `/produs/${cod}`;
+            }
+        } else if (keyCode === 32) { // Space key pressed
+            // Redirect to a different page
+            window.location.href = '/different-page';
+        }
+    });
+    // Handle click on suggestion
+    $(document).on('click', '.suggestion', function() {
+        var cod = $(this).data('cod');
+        var marca = $(this).data('marca');
+        var model = $(this).data('model');
+        $('#searchInput').val(`${marca} - ${model}`);
+        window.location.href = `/produs/${cod}`;
+    });
+});
+
+        </script>
 </body>
-</html>
 
-{% endblock %}
+</html>

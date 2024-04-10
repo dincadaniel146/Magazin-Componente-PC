@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Product - Brand</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="/static/css/Bootstrap-Calendar.css">
+    <link rel="stylesheet" href="/static/css/Navbar-Right-Links-Dark-icons.css">
+</head>
+
+<body>
+    <section class="py-5">
+        <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark" style="margin-left: -1px;padding-top: 0px;margin-top: -49px;padding-left: 0px;">
+            <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span class="bs-icon-sm bs-icon-rounded d-flex justify-content-center align-items-center me-2 bs-icon" style="margin-bottom: 0px;margin-left: 0px;padding-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="padding-top: 0px;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;font-size: 38px;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3 6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6V14C21 15.1046 20.1046 16 19 16H5C3.89543 16 3 15.1046 3 14V6ZM5 6H19V14H5V6Z" fill="currentColor"></path>
+                            <path d="M2 18C1.44772 18 1 18.4477 1 19C1 19.5523 1.44772 20 2 20H22C22.5523 20 23 19.5523 23 19C23 18.4477 22.5523 18 22 18H2Z" fill="currentColor"></path>
+                        </svg></span><span class="text-capitalize fs-5 fw-bold">Magazin Componente IT</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-5" style="margin-right: -126px;padding-left: 0px;margin-left: -5px;"><input class="mx-auto" type="search" placeholder="Cautati produse (ID/Nume)" style="font-size: 18px;border-radius: 16px;border-color: transparent;">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active fw-light" href="/adaugareprodus" style="margin-right: 0px;">Adaugare produs nou</a></li>
+                    </ul><a class="active fw-light" href="#" style="margin-left: 15px;">Istoric comenzi</a><a class="active fw-light" href="/vizualizare" style="margin-left: 15px;">Vizualizare inventar</a><a class="btn btn-primary btn-sm fw-normal" role="button" style="background: var(--bs-red);color: var(--bs-black);font-size: 16px;margin-left: 16px;border-color: transparent;">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container py-5">
+            <div class="card"></div>
+        </div>
+    </section>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            <div id="success-alert" class="alert alert-success" role="alert">
+                                {% for category, message in messages %}
+                                <li class="{{ category }}">{{ message }}</li>
+                              {% endfor %}
+                            </div>
+                            <script>
+                                setTimeout(function() {
+                                  var alert = document.getElementById('success-alert');
+                                  alert.parentNode.removeChild(alert);
+                                }, 4000);
+                              </script>
+                            {% endif %}
+                          {% endwith %}
+        <div class="row">
+            <div class="col-md-6">
+                {% if product.imagine %}
+                    {% for image_path in product.imagine.split(';') %}
+                    <img src="{{ url_for('static', filename='produse_img/' + image_path) }}" width="450" height="400">
+                    {% endfor %}
+                {% else %}
+                    <!-- Display a placeholder image or message if no image is available -->
+                    <img src="{{ url_for('static', filename='produse_img/istockphoto-1409329028-170667a.jpg') }}" width="450" height="400">
+                    {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" style="font-size: 35px;">{{product.marca}}<span><h2 style="font-size:20px;"> {{product.model}}</h2></span></h2>
+                        <h6 id="productCod" class="text-muted card-subtitle mb-2">ID Produs: {{product.cod}}</h6>
+                        <p class="card-text">{{product.descriere}}</p>
+                        <p class="card-text" style="margin-top: -14px;padding-top: 0px;font-size: 25px;">{{product.pret}} lei</p><span>Stoc&nbsp; &nbsp;&nbsp;</span><input type="number" style="border-radius: 10px;" value="{{product.stoc}}"><button class="btn btn-primary btn-sm stergereProdus" data-bs-toggle="modal" data-bs-target="#stergereModal" type="button" style="margin-left: 30px;background: rgb(255,54,41);border-style: none;">Stergeti produsul</button> 
+                        <button class="btn btn-primary btn-sm editProdus" type="button" data-bs-toggle="modal" data-bs-target="#actualizareModal" style="margin-top: 30px;margin-left:314px;background: rgb(14, 126, 255);border-style: none;">Editati produsul</button>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal Stergere-->  
+
+     <!-- Modal editare -->
+     <div class="modal fade" id="actualizareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Actualizare produs</h5>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <input type="hidden" name="cod" id="cod">
+                    <div class="mb-3">
+                        <input class="form-control" type="text" placeholder="Marca produsului" id="marca" name="marca" style="margin-bottom: 25px;margin-top: 4px;">
+                        <input class="form-control" type="text" id="model" name="model" placeholder="Introduceti modelul" style="margin-bottom: 25px;">
+                        <select class="form-select" id="categorie" name="categorie" style="margin-bottom: 25px;">
+                            <option>Placi de baza</option>
+                            <option>Procesoare</option>
+                            <option>Memorii RAM</option>
+                            <option>Componente stocare(SSD)</option>
+                            <option>Componente stocare(HDD)</option>
+                            <option>Placi video</option>
+                            <option>Surse de alimentare</option>
+                            <option>Carcase</option>
+                            <option>Ventilatoare/radiatoare</option>
+                            <option>Unelte</option>
+                            <option>Placi de sunet</option>
+                            <option>Placi de captura</option>
+                            <option>Monitoare</option>
+                            <option>Retelistica & UPS</option>
+                            <option>Periferice</option>
+                            <option>Altele</option>
+                        </select>
+                        <input class="form-control" type="number" id="pret" name="pret" placeholder="Introduceti pretul" style="margin-bottom: 25px;">
+                        <input class="form-control" type="number" id="stoc" name="stoc" placeholder="Introduceti stocul" style="margin-bottom: 25px;">
+                        <textarea class="form-control" id="descriere" name="descriere" rows="6" placeholder="Introduceti o descriere a produsului" style="margin-bottom: 25px;"></textarea>
+                        <span class="text-center d-block" style="margin-bottom: 5px;">Selectati o poza a produsului</span>
+                        <input class="form-control" type="file" style="margin-bottom: 25px;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulare</button>
+                        <!-- Remove the second type attribute -->
+                        <button class="btn btn-primary" type="submit">Salvati modificarile</button>
+                    </div>
+                </form>        
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="stergereModal"tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Se va sterge produsul: 
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/stergereprodus">
+                    <input type="hidden" name="cod-stergere" id="cod-stergere" value="{{product.cod}}">
+                    <div class="mb-3">
+                        <ul>
+                        <li>
+                        <h5  class="d-inline">{{product.marca}}</h5>
+                        <h5  class="d-inline">{{product.model}}</h5>
+                        </li>
+                        </ul> 
+                    </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulare</button>
+              <button class="btn btn-danger" type="submit">Stergeti</button>
+            </div>
+      <script>
+        // Function to populate the form inside the modal with product data
+        function populateEditForm(produs) {
+            document.getElementById('cod').value = produs.cod;
+            document.getElementById('marca').value = produs.marca;
+            document.getElementById('model').value = produs.model;
+            document.getElementById('categorie').value = produs.categorie;
+            document.getElementById('pret').value = produs.pret;
+            document.getElementById('stoc').value = produs.stoc;
+            document.getElementById('descriere').value = produs.descriere;
+            // Populate your form fields with product data here
+        }
+    
+        // Handle click event on "Editati produsul" button
+        document.querySelector('.editProdus').addEventListener('click', function() {
+    // Extract the product cod from the HTML element
+    var productCodElement = document.getElementById('productCod');
+    var productCod = productCodElement.textContent.split(': ')[1].trim(); // Assuming 'ID Produs: cod' format
+
+    // Fetch product data based on productCod
+    fetch('/modal-produs/' + productCod)
+        .then(response => response.json())
+        .then(product => {
+            // Populate the form inside the modal with product data
+            populateEditForm(product);
+            // Show the modal
+            var modal = new bootstrap.Modal(document.getElementById('actualizareModal'));
+            modal.show();
+        })
+        .catch(error => console.error('Error fetching product data:', error));
+});
+    </script>
+    <script>
+
+
+     
+</script>
+    <footer class="bg-dark"></footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/bold-and-dark.js"></script>
+</body>
+
+</html>
