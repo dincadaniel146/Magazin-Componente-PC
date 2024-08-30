@@ -25,23 +25,37 @@ Platforma cuprinde o metodă de autentificare pentru personalul magazinului prec
 -Pentru Front-end: HTML,CSS/Bootstrap,Javascript,Jquery.
 
 ## Prezentarea aplicatiei
+
 ### Pagina de autentificare
+
 Accesul la platforma se va realiza prin intermediul paginii de logare, cu un fundal simplu si text usor de citit. Autentificarea se va realiza pe baza adresei de e-mail si a parolei, acestea fiind alese in timpul inregistrarii contului. 
+
 ![image](https://github.com/user-attachments/assets/d9428f0d-f881-423a-9f39-ae38286d919d)
 
 ### Pagina de inregistrare
-In cazul in care nu exista un cont al administratorului, se poate realiza unul prin intermediul paginii de “Cont Nou” unde utilizatorul trebuie sa introducă Adresa de mail, Numele si parola. In realitate, aceasta pagina nu va putea fi accesibila decât personalului autorizat al magazinului.
+
+In cazul in care nu exista un cont al administratorului, se poate realiza unul prin intermediul paginii de “Cont Nou” unde utilizatorul trebuie sa introducă Adresa de mail, Numele si parola. 
+
+In realitate, aceasta pagina nu va putea fi accesibila decât personalului autorizat al magazinului.
+
 ![image](https://github.com/user-attachments/assets/ab4a1499-f5f0-4965-bccd-c17ec59f96bc)
 
 ### Pagina principala
+
 Odată autentificat, utilizatorul va fi întâmpinat de pagina principala, alcătuita din meniul de navigație plasat in partea de sus a paginii, cu link-uri către paginile aplicației, un buton pentru delogarea din cont si o căsuță de căutare a produselor.
+
 Putin mai jos avem un mesaj de întâmpinare alături de numele Utilizatorului, email-ul acestuia si data de astăzi plasata in partea dreapta.
+
 Conținutul paginii este format din căsuțe cu diverse informații de baza precum comenzile recente, stocul de produse sau produsele cu stoc limitatFooter-ul conține diverse link-uri si un mesaj de copyright.
+
 ![image](https://github.com/user-attachments/assets/5ed97b50-27b9-4e92-8bc8-0c140654ade4)
 
 ### Pagina de vizualizare a inventarului
+
 Pagina “vizualizare inventar” cuprinde un tabel cu elemente text usor de citit, pe un fundal inchis, cu produsele prezente in inventarul magazinului. 
+
 Sunt prezente diverse informatii despre produsele respective iar pe ultima coloana avem butoane cu diverse actiuni pentru a modifica un produs sau a-l sterge.
+
 ![image](https://github.com/user-attachments/assets/f1aa492d-8b2f-479c-a0e0-992392711c85)
 
 ### Butoanele de pe pagina "Vizualizare Inventar"
