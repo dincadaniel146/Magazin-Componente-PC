@@ -20,8 +20,11 @@ Aplicatia are rolul de a asigura administrarea eficientă al unui magazin online
 Platforma cuprinde o metodă de autentificare pentru personalul magazinului precum și diverse pagini pentru a gestiona eficient comenzile sau inventarul magazinului.
 
 ## Tehnologii folosite
+
 -Pentru partea de backend: Python impreuna cu framework-ul “Flask”.
+
 -Pentru baza de date: SQL-Alchemy
+
 -Pentru Front-end: HTML,CSS/Bootstrap,Javascript,Jquery.
 
 ## Prezentarea aplicatiei
